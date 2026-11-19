@@ -1,0 +1,27 @@
+import type { GiphyRandomResponse, Gif } from "./data/giphy.response";
+
+const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
+
+if (!API_KEY) {
+  throw new Error("Configura VITE_GIPHY_API_KEY en .env.local para ejecutar este ejemplo.");
+}
+
+const myRequest = fetch(
+  `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=&rating=g`,
+);
+
+const createImageInsideDom = (url: string) => {
+  const imgElement = document.createElement("img");
+  imgElement.src = url;
+  document.body.append(imgElement);
+};
+
+myRequest
+  .then((response) => response.json())
+  .then(({ data }: GiphyRandomResponse) => {
+    const imageUrl = data.images.original.url;
+    createImageInsideDom(imageUrl);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
