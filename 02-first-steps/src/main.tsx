@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
-import { FirstStepsApp } from "./FirstStepsApp";
+import { MyAwesomeApp } from "./MyAwesomeApp";
 
 createRoot(document.getElementById("root")!).render(
   <>
-    <FirstStepsApp />
+    <MyAwesomeApp />
   </>,
 );
