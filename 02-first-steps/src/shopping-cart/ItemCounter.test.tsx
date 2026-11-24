@@ -47,4 +47,22 @@ describe("ItemCounter", () => {
     fireEvent.click(buttonSubtract);
     expect(screen.getByText("1")).toBeDefined();
   });
+
+  test("should change to red when count is 1", () => {
+    const quantity = 1;
+    const name = "Test item";
+    render(<ItemCounter name={name} quantity={quantity} />);
+
+    const itemText = screen.getByText(name);
+    expect(itemText.style.color).toBe("red");
+  });
+
+  test("should change to black when count is greater than 1", () => {
+    const quantity = 2;
+    const name = "Test item";
+    render(<ItemCounter name={name} quantity={quantity} />);
+
+    const itemText = screen.getByText(name);
+    expect(itemText.style.color).toBe("black");
+  });
 });
