@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { GifList } from "./gifs/components/GifList";
 import { PreviousSearches } from "./gifs/components/PreviousSearches";
 import { mockGifs } from "./mock-data/gifs.mock";
@@ -5,6 +6,16 @@ import { CustomHeader } from "./shared/components/CustomHeader";
 import { SearchBar } from "./shared/components/SearchBar";
 
 export const GifsApp = () => {
+  const [previousTerms, setPreviousTerms] = useState(["dragon ball z", "goku"]);
+
+  const handleTermClicked = (term: string) => {
+    console.log(term);
+  };
+
+  const handleSearch = (query: string) => {
+    console.log({ query });
+  };
+
   return (
     <>
       {/* Header */}
@@ -13,9 +24,12 @@ export const GifsApp = () => {
         description="Descubre y comparte el Gif perfecto"
       />
       {/* SearchBar  */}
-      <SearchBar placeholder="Buscar" />
+      <SearchBar onQuery={handleSearch} placeholder="Buscar" />
       {/* PreviousSearches  */}
-      <PreviousSearches searches={["Goku", "Dragon Ball Z", "Elden Ring"]} />
+      <PreviousSearches
+        searches={previousTerms}
+        onLabelClicked={handleTermClicked}
+      />
       {/* Gifs */}
       <GifList gifs={mockGifs} />
       {/* GifsList: Props => gifs: Gif[]  */}
